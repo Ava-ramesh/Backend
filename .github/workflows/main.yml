@@ -38,4 +38,4 @@ jobs:
             sudo docker rm -f backend
             sudo docker rmi -f rameshkumar456/backend
             sudo docker pull rameshkumar456/backend:latest
-            sudo docker run --name backend -p 8080:3001 rameshkumar456/backend:latest
+            sudo docker run --name backend -p 80:3000 rameshkumar456/backend:latest
