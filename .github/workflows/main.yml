@@ -22,7 +22,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: rameshkumar456/backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/backend:latest
       
       - name: executing remote ssh commands using password
         uses: cross-the-world/ssh-pipeline@master
@@ -31,9 +31,8 @@ jobs:
           user: ${{ secrets.SSH_USERNAME }}
           pass: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          connect_timeout: 10s
           script: |
             sudo docker rm -f backend
-            sudo docker rmi -f rameshkumar456/backend
-            sudo docker pull rameshkumar456/backend:latest
-            sudo docker run --name backend -p 3000:3000 -d rameshkumar456/backend:latest
+            sudo docker rmi -f ${{ secrets.DOCKER_USERNAME }}/backend
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/backend:latest
+            sudo docker run --name backend -p 3000:3000 -d ${{ secrets.DOCKER_USERNAME }}/backend:latest
